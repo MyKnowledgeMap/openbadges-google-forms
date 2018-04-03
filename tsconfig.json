@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "pretty": true,
+    "target": "es6",
+    "allowJs": false,
+    "noEmit": true,
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "module": "commonjs"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
