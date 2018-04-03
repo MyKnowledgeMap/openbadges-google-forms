@@ -3,7 +3,7 @@ const archiver = require("archiver");
 const name = "forms";
 
 // Fetch the manifest file.
-const manifestFile = `./chrome/${name.toLowerCase()}/manifest.json`;
+const manifestFile = `./chrome/manifest.json`;
 const manifest = JSON.parse(fs.readFileSync(manifestFile));
 // Split the current version string "x.x.x"
 const versions = manifest.version.split(".");
@@ -35,7 +35,7 @@ archive.append(fs.createReadStream(`./dist/${name}.js`), {
   name: "Code.gs"
 });
 // Add the chrome folder contents.
-archive.directory(`./chrome/${name.toLowerCase()}/`, false);
+archive.directory(`./chrome/`, false);
 // Finalize the archive.
 archive.finalize();
 console.log("Packaged successfully.");
