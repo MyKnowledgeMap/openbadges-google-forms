@@ -2,8 +2,6 @@ import authEmailTemplate from "./templates/auth.email.html";
 import authModalTemplate from "./templates/auth.modal.html";
 import settingsSidebarTemplate from "./templates/forms-settings.sidebar.html";
 
-const rgx = new RegExp(/{{.+}}/);
-
 /**
  * The onOpen event function which runs when the document/form is opened.
  */
@@ -123,8 +121,9 @@ function onFormSubmit(e: IFormSubmitEvent): boolean {
   // Stop processing if the properties needed to make a request are not set.
   const requiredProperties = ["apiUrl", "apiToken", "apiKey"];
   const hasRequiredProperties = requiredProperties
-    .map((key) => !!props[key])
-    .every((result) => result);
+    .map((key) => props[key])
+    .every((value) => value !== undefined && value !== null && value !== "");
+
   if (!hasRequiredProperties) {
     Logger.log("Request cancelled as required properties are missing.");
     return false;
@@ -294,30 +293,25 @@ function setDynamicProperties(
     return false;
   }
 
-  const hasDynamicProps = Object.keys(props).some((x) => rgx.test(props[x]));
+  const responses: ISimpleItemResponse[] = formResponse
+    .getItemResponses()
+    .map((r) => ({
+      title: r.getItem().getTitle(),
+      response: r.getResponse()
+    }));
 
-  if (hasDynamicProps) {
-    // Load all responses so we can find matching ones.
-    const responses: ISimpleItemResponse[] = formResponse
-      .getItemResponses()
-      .map((r) => ({
-        title: r.getItem().getTitle(),
-        response: r.getResponse()
-      }));
-
-    Object.keys(props)
-      .map((key) => ({ key, value: props[key].toLowerCase() }))
-      .filter((prop) => rgx.test(prop.value))
-      .forEach((prop) => {
-        const titleFromProp = prop.value.replace(/[{}]/g, "");
-        const item = responses.filter(
-          (resp) => titleFromProp === resp.title.toLowerCase()
-        )[0];
-        if (item !== undefined) {
-          props[prop.key] = item.response;
-        }
-      });
-  }
+  Object.keys(props)
+    .filter((x) => /{{.+}}/.test(props[x]))
+    .map((key) => ({ key, value: props[key].toLowerCase() }))
+    .forEach((prop) => {
+      const titleFromProp = prop.value.replace(/[{}]/g, "");
+      const item = responses.filter(
+        (resp) => titleFromProp === resp.title.toLowerCase()
+      )[0];
+      if (item !== undefined) {
+        props[prop.key] = item.response;
+      }
+    });
   return true;
 }
 
@@ -331,7 +325,31 @@ function showSettingsSidebar(): void {
   ) as IFormsSettingsTemplate;
 
   // Add the bound properties to the template.
-  const props = PropertiesService.getDocumentProperties().getProperties() as IFormsDocumentProperties;
+  const documentProperties = PropertiesService.getDocumentProperties();
+  const savedProps = documentProperties.getProperties() as IFormsDocumentProperties;
+
+  const defaultProps: IFormsDocumentProperties = {
+    apiKey: "",
+    apiUrl: "",
+    apiToken: "",
+    activityId: "",
+    text1: "",
+    text2: "",
+    int1: "",
+    int2: "",
+    date1: "",
+    activityTime: "",
+    userId: "",
+    firstName: "",
+    lastName: ""
+  };
+
+  const props: IFormsDocumentProperties = Object.assign(
+    {},
+    defaultProps,
+    savedProps
+  );
+
   Object.keys(props)
     .map((key) => ({ key, value: props[key] }))
     .forEach((prop) => {
