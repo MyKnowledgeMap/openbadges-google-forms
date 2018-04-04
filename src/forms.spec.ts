@@ -25,7 +25,7 @@ enum AuthMode {
 }
 
 describe("forms", () => {
-  beforeAll(() => {
+  beforeEach(() => {
     global.Logger = {
       log: jest.fn()
     } as any;
