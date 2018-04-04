@@ -25,7 +25,7 @@ enum AuthMode {
 }
 
 describe("forms", () => {
-  beforeAll(() => {
+  beforeEach(() => {
     global.Logger = {
       log: jest.fn()
     } as any;
@@ -505,7 +505,15 @@ describe("forms", () => {
 
     describe("when no dynamic properties", () => {
       // Arrange
-      const response = {} as any;
+      const itemResponse: GoogleAppsScript.Forms.ItemResponse = {
+        getResponse: jest.fn(),
+        getItem: jest.fn().mockReturnValue({ getTitle: jest.fn() })
+      } as any;
+
+      const response: GoogleAppsScript.Forms.FormResponse = {
+        getItemResponses: jest.fn().mockReturnValue([itemResponse])
+      } as any;
+
       const props: IFormsDocumentProperties = {
         text1: "value"
       } as any;
