@@ -6,16 +6,20 @@ const webStore = require("chrome-webstore-upload")({
   clientSecret: process.env.GOOGLE_CLIENTSECRET,
   refreshToken: process.env.GOOGLE_REFRESHTOKEN
 });
+const name = "forms";
+
+// Final package will be here
+const package = `./dist/${name}.zip`;
 
 // Fetch a token for uploading and publishing.
 webStore
   .fetchToken()
   .then(async (token) => {
     // Get the package.
-    const package = fs.createReadStream(`./dist/forms.zip`);
+    const archive = fs.createReadStream(package);
 
     // Upload the package.
-    const uploadResult = await webStore.uploadExisting(package, token);
+    const uploadResult = await webStore.uploadExisting(archive, token);
     if (uploadResult.uploadState !== "SUCCESS") {
       throw uploadResult;
     }

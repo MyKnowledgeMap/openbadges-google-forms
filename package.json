@@ -38,7 +38,6 @@
     "chrome-webstore-upload": "^0.2.2",
     "coveralls": "^3.0.0",
     "dotenv-safe": "^5.0.1",
-    "fs-extra": "^5.0.0",
     "husky": "^0.14.3",
     "jest": "^22.4.2",
     "jest-junit": "^3.6.0",
@@ -47,31 +46,5 @@
     "ts-jest": "^22.4.1",
     "tslint": "^5.9.1",
     "typescript": "^2.7.2"
-  },
-  "manifest": {
-    "manifest_version": 2,
-    "version": "0",
-    "name": "OpenBadges.me Forms",
-    "shortName": "OB Forms",
-    "description":
-      "Create records that something has happened using your Google Form as a trigger.",
-    "icons": {
-      "16": "script-icon_16.png",
-      "128": "script-icon_128.png"
-    },
-    "container": ["GOOGLE_FORM"],
-    "app": {
-      "background": {
-        "scripts": ["background.js"]
-      }
-    },
-    "api_console_project_id": "116763419397",
-    "container_info": {
-      "post_install_tip":
-        "Enter your API key, token and activity details in the settings. Make sure your form is collecting email addresses too!",
-      "container_id": "MGw5pp9vT7CiF6V2ipGEUBbxLzPCDsMJl",
-      "container_version": "10"
-    },
-    "update_url": "https://clients2.google.com/service/update2/crx"
   }
 }
