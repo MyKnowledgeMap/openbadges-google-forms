@@ -6,10 +6,10 @@ const webStore = require("chrome-webstore-upload")({
   clientSecret: process.env.GOOGLE_CLIENTSECRET,
   refreshToken: process.env.GOOGLE_REFRESHTOKEN
 });
-const name = "forms";
+const name = "";
 
 // Final package will be here
-const package = `./dist/${name}.zip`;
+const package = `./dist/forms.zip`;
 
 // Fetch a token for uploading and publishing.
 webStore
