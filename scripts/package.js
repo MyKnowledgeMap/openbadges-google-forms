@@ -36,6 +36,5 @@ archive.directory(`./assets/`, false);
 
 // Finalize the archive.
 archive.finalize();
+fs.removeSync(`./dist/forms.js`);
 console.log("Packaged successfully.");
-
-fs.remove(`./dist/forms.js`).then(null);
