@@ -1,5 +1,4 @@
 import * as module from "./forms";
-import { AuthMode, AuthorizationStatus } from "./helpers/test.helpers";
 
 interface IGlobal {
   FormApp: GoogleAppsScript.Forms.FormApp;
@@ -12,6 +11,18 @@ interface IGlobal {
   Utilities: GoogleAppsScript.Utilities.Utilities;
 }
 declare const global: IGlobal;
+
+enum AuthorizationStatus {
+  REQUIRED,
+  NOT_REQUIRED
+}
+
+enum AuthMode {
+  NONE,
+  CUSTOM_FUNCTION,
+  LIMITED,
+  FULL
+}
 
 describe("forms", () => {
   beforeEach(() => {
@@ -125,7 +136,7 @@ describe("forms", () => {
     // Setup the auth status for the test.
     const setupScriptApp = (
       status: AuthorizationStatus,
-      triggers: GoogleAppsScript.Script.Trigger[]
+      triggers?: GoogleAppsScript.Script.Trigger[]
     ) => {
       const info: GoogleAppsScript.Script.AuthorizationInfo = {
         getAuthorizationStatus: jest.fn().mockReturnValue(status)
