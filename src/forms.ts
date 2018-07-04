@@ -157,11 +157,11 @@ function sendToApi(
   // Build the request payload.
   const payload: ICreateActivityEvent = {
     activityId: props.activityId,
-    activityTime: response.getTimestamp().toUTCString(),
+    activityTime: props.activityTime,
     text1: props.text1,
     text2: form.getId(),
-    email: response.getRespondentEmail(),
-    userId: response.getRespondentEmail(),
+    email: props.email,
+    userId: props.userId,
     int1: props.int1,
     int2: props.int2,
     date1: props.date1,
@@ -340,6 +340,7 @@ function showSettingsSidebar(): void {
     date1: "",
     activityTime: "",
     userId: "",
+    email: "",
     firstName: "",
     lastName: ""
   };
