@@ -43,10 +43,38 @@
           These are optional properties which can be sent with the request when a form is completed.
         </div>
       </li>
-      <li class="collection-item">
+         <li class="collection-item">
+        <div class="input-field">
+          <input id="firstname" name="firstname" type="text" data-length="255" class="validate" value="<?= firstname ?>">
+          <label for="firstname">First name</label>
+        </div>
+        <div class="input-field">
+          <input id="lastname" name="lastname" type="text" data-length="255" class="validate" value="<?= lastname ?>">
+          <label for="lastname">Last name</label>
+        </div>
+          <div class="input-field">
+          <input id="email" name="email" type="text" data-length="255" class="validate" value="<?= email ?>">
+          <label for="email">Email Address</label>
+        </div>
+         <div class="input-field">
+          <input id="userId" name="userId" type="text" data-length="255" class="validate" value="<?= userId ?>">
+          <label for="userId">User Identifier</label>
+        </div>
+        <div class="input-field">
+          <input id="activityTime" name="activityTime" type="text" data-length="255" class="validate" value="<?= activityTime ?>">
+          <label for="activityTime">Activity Date</label>
+        </div>
         <div class="input-field">
           <input id="text1" name="text1" type="text" data-length="255" class="validate" value="<?= text1 ?>">
-          <label for="text1">Text</label>
+          <label for="text1">Text 1</label>
+        </div>
+        <div class="input-field">
+          <input id="text2" name="text2" type="text" data-length="255" class="validate" value="<?= text2 ?>">
+          <label for="text2">Text 2</label>
+        </div>
+        <div class="input-field">
+          <input id="date1" name="date1" type="text" class="validate" value="<?= date1 ?>">
+          <label for="date1">Date</label>
         </div>
         <div class="input-field">
           <input id="int1" name="int1" type="number" step="1" class="validate" value="<?= int1 ?>">
@@ -56,10 +84,6 @@
           <input id="int2" name="int2" type="number" step="1" class="validate" value="<?= int2 ?>">
           <label for="int2">Integer 2</label>
         </div>
-        <!-- <div class="input-field">
-          <input id="date1" name="date1" type="text" class="validate" value="<?= date1 ?>">
-          <label for="date1">Date</label>
-        </div> -->
       </li>
       <li class="collection-item grey lighten-3">
         <div class="col s12 center-align">
