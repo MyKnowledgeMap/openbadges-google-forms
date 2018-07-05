@@ -161,7 +161,7 @@ function sendToApi(
     text1: props.text1,
     text2: form.getId(),
     email: props.email,
-    userId: props.userId(),
+    userId: props.userId,
     int1: props.int1,
     int2: props.int2,
     date1: props.date1,
